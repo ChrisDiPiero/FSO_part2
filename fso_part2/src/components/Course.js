@@ -1,7 +1,5 @@
 import React from 'react'
 
-
-
 const Course = ({ course }) => {
   const parts = course.parts
   const courseSum = parts.reduce(
@@ -12,7 +10,7 @@ const Course = ({ course }) => {
 
   return (
     <div>
-      <h1>{course.name}</h1>
+      <h2>{course.name}</h2>
       <ul>
         {parts.map((e) =>
           <li key={e.id}>{`${e.name}: ${e.exercises}`}</li>
