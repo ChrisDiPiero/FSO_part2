@@ -5,10 +5,18 @@ const App = () => {
   const [ persons, setPersons ] = useState([
     { name: 'Arto Hellas'}
   ])
+
   const [ newName, setNewName ] = useState('')
 
   const handleEvent = (e) => {
     e.preventDefault()
+    const addPerson = { name: newName}
+    setPersons(persons => [...persons, addPerson])
+  }
+
+  const nameUpdateHandler = (event) => {
+    setNewName(event.target.value)
+    console.log(newName)
   }
 
   return (
@@ -16,7 +24,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <form onSubmit={handleEvent}>
         <div>
-          name: <input />
+          name: <input type="text" value={newName} onChange={nameUpdateHandler}/>
         </div>
         <div>
           <button type="submit">add</button>
