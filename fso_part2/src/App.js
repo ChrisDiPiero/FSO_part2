@@ -3,20 +3,28 @@ import People from './components/People'
 
 const App = () => {
   const [ persons, setPersons ] = useState([
-    { name: 'Arto Hellas'}
+    { name: 'Arto Hellas',
+      number: '123-456-7890'}
   ])
 
   const [ newName, setNewName ] = useState('')
+  const [ newNumber, setNewNumber ] = useState('')
 
   const handleEvent = (e) => {
     e.preventDefault()
-    const addPerson = { name: newName}
-    setPersons(persons => [...persons, addPerson])
+    if(persons.filter(i => i.name === newName)) {
+      alert(`${newName} is already added to this phonebook.`)
+    } else {
+      const addPerson = { name: newName, number: newNumber}
+      setPersons(persons => [...persons, addPerson])
+    }
   }
 
   const nameUpdateHandler = (event) => {
     setNewName(event.target.value)
-    console.log(newName)
+  }
+  const numberUpdateHandler = (event) => {
+    setNewNumber(event.target.value)
   }
 
   return (
@@ -27,13 +35,16 @@ const App = () => {
           name: <input type="text" value={newName} onChange={nameUpdateHandler}/>
         </div>
         <div>
+          number: <input type="text" value={newNumber} onChange={numberUpdateHandler}/>
+        </div>
+        <div>
           <button type="submit">add</button>
         </div>
       </form>
       <h2>Numbers</h2>
       <ul>
         {persons.map( (e) => (
-            <li key={e.name}>{e.name}</li>
+            <li key={e.name}>{e.name}: {e.number}</li>
         ))}
       </ul>
     </div>
