@@ -11,7 +11,7 @@ console.log(promise2)
 
 ReactDOM.render(
 
-    <App />,
+    <App />,// why is there a comma here?
 
   document.getElementById('root')
 );
