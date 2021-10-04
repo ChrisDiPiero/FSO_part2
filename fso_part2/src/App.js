@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
-import People from './components/People'
+import People from './components/Persons'
+import Filter from './components/Filter'
 
 const App = () => {
   const [ persons, setPersons ] = useState([
@@ -23,6 +24,9 @@ const App = () => {
     }
   }
 
+  const searchTermHandler = (event) => {
+    setSearchTerm(event.target.value.toLowerCase())
+  }
   const nameUpdateHandler = (event) => {
     setNewName(event.target.value)
   }
@@ -30,18 +34,19 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
-  const searchTermHandler = (event) => {
-    setSearchTerm(event.target.value.toLowerCase())
-  }
+
 
   const populateNameList = (e) => <li key={e.name}>{e.name}: {e.number}</li>
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <div>
-        Search: <input type='text' value={searchTerm} onChange={searchTermHandler}/>
-      </div>
+      
+      <Filter 
+        value={searchTerm}
+        searchTermHandler={searchTermHandler}
+      />
+
       <h2>Add new number</h2>
       <form onSubmit={handleEvent}>
         <div>
