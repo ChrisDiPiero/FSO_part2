@@ -5,10 +5,11 @@ const Filter = (props) => {
 
   return(
     <div>
-      Search:
+      Search: 
       <input type='text'
-      value={props.value}
-      onChange={props.searchTermHandler}/>
+        value={props.value}
+        onChange={props.searchTermHandler}
+      />
     </div>
   )
 }

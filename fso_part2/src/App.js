@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import People from './components/Persons'
+import PersonForm  from './components/PersonForm'
 import Filter from './components/Filter'
 
 const App = () => {
@@ -16,7 +16,8 @@ const App = () => {
 
   const handleEvent = (e) => {
     e.preventDefault()
-    if(persons.filter(i => i.name === newName)) {
+    console.log(newName, persons.filter(i => i[newName]))
+    if(persons.some(i => i.name === newName)) {
       alert(`${newName} is already added to this phonebook.`)
     } else {
       const addPerson = { name: newName, number: newNumber}
@@ -41,24 +42,20 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      
       <Filter 
         value={searchTerm}
         searchTermHandler={searchTermHandler}
       />
 
       <h2>Add new number</h2>
-      <form onSubmit={handleEvent}>
-        <div>
-          name: <input type='text' value={newName} onChange={nameUpdateHandler}/>
-        </div>
-        <div>
-          number: <input type='text' value={newNumber} onChange={numberUpdateHandler}/>
-        </div>
-        <div>
-          <button type='submit'>add</button>
-        </div>
-      </form>
+      <PersonForm
+        submit={handleEvent}
+        name={newName}
+        updateName={nameUpdateHandler}
+        number={newNumber}
+        updateNumber={numberUpdateHandler}
+      />
+
       <h2>Numbers</h2>
       <ul>
         {
